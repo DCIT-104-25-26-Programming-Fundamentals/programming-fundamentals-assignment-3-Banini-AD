@@ -42,4 +42,25 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+function isPrime(number) {
+  if (number < 2) {
+    return `${number} less than 2`;
+  }
 
+  for (let j = 2; j < number; j++) {
+    if (number % j === 0) {
+      return `${number} is NOT a prime number`;
+    }
+  }
+
+  return `${number} is a prime number`;
+}
+
+function main() {
+  const readlineSync = require("readline-sync");
+  const number = readlineSync.questionInt("Enter a number: ");
+  const result = isPrime(number);
+  console.log(result);
+}
+
+main();
