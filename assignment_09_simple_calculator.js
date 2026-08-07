@@ -2,7 +2,7 @@
 // PROGRAMMING FUNDAMENTALS — Assignment 9
 // =============================================================================
 //
-// TASK: Console-Based Simple Calculator
+// TASK: console-Based Simple Calculator
 //
 // Build a calculator program that runs in the console and performs basic
 // arithmetic operations based on the user's input.
@@ -73,5 +73,117 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+const readlineSync = require("readline-sync")
 
+function add (a, b){
+  return a + b
+}
 
+function subtract (a, b){
+  return a - b
+}
+
+function multiply (a, b){
+  return a * b
+}
+
+function divide (a, b){
+  if (b === 0){
+    return None
+  }
+  const result = a / b
+  return result.toFixed(2)
+}
+
+function modulus (a, b){
+  if (b === 0){
+    return None
+  }
+  return a % b
+}
+
+function exponent (a, b){
+  return a ** b
+}
+
+function getTwoNumbers (){
+  const firstInput = readlineSync.question("Enter first number : ")
+  const secondInput = readlineSync.question("Enter second number: ")
+  first = parseInt(firstInput)
+  second = parseInt(secondInput)
+  return [first, second]
+}
+
+function printMenu (){
+  console.log("============================")
+  console.log("     SIMPLE CALCULATOR")
+  console.log("============================")
+  console.log("1. Addition")
+  console.log("2. Subtraction")
+  console.log("3. Multiplication")
+  console.log("4. Division")
+  console.log("5. Modulus")
+  console.log("6. Exponentiation")
+  console.log("7. Quit")
+}
+function main (){
+  let running = true
+
+  while (running){
+    printMenu()
+    choice = readlineSync.questionInt("Select an operation (1-7): ")
+
+    if (choice < 1 || choice > 7){
+      console.log("Error: Please enter a number between 1 and 7.")
+      return
+    }
+
+    if(choice === 7){
+      console.log("Goodbye!")
+      running = false
+      return
+    }
+
+    const [first, second] = getTwoNumbers()
+
+    if (choice === 1){
+      result = add(first, second)
+      console.log(`Result: ${first} + ${second} = ${result}`)
+    }
+    else if( choice == "2"){
+      result = subtract(first, second)
+      console.log(`Result: ${first} - ${second} = ${result}`)
+    }
+    else if( choice === 3){
+      result = multiply(first, second)
+      console.log(`Result: ${first} * ${second} = ${result}`)
+    }
+    else if( choice === 4){
+      result = divide(first, second)
+      if (result === 'None'){
+        console.log("Error: Cannot divide by zero.")
+      }
+      else{
+        console.log(`Result: ${first} / ${second} = ${result}`)
+      }
+    }
+    else if( choice === 5){
+      result = modulus(first, second)
+      if  (result === 'None'){
+        console.log("Error: Cannot divide by zero.")
+      }
+      else{
+        console.log(`Result: ${first} % ${second} = ${result}`)
+      }
+    }
+    else if( choice === 6){
+      result = exponent(first, second)
+      console.log(`Result: ${first} ** ${second} = ${result}`)
+    }
+    else{
+      return
+    }
+    }
+}
+
+main()
