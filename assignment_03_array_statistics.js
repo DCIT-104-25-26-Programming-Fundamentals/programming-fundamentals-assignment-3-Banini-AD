@@ -43,4 +43,57 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+function numbersSum (numbers){
+  let sumTotal = 0
+  for (let i = 0; i < numbers.length ; i++){
+    sumTotal += numbers[i]
+  }
+  return sumTotal 
+}
 
+function numbersAvg (numbers){
+  let total = numbersSum(numbers)
+  let avg = total / numbers.length
+  return avg
+}
+function maxNumber (numbers){
+  let lgNum = numbers[0]
+  for (let i = 0; i < numbers.length; i++){
+    if (numbers[i] > lgNum){
+      lgNum = numbers[i]
+    }
+  }
+  return lgNum
+}
+
+function minNumber (numbers){
+  let smNum = numbers[0]
+  for (let i = 0; i < numbers.length; i++){
+    if (numbers[i] < smNum){
+      smNum = numbers[i]
+    }
+  }
+  return smNum
+}
+
+function main (){
+  const readlineSync = require("readline-sync")
+  const userInput = readlineSync.question("How many numbers? ")
+  const N = parseInt(userInput)
+
+  if (N < 0){
+    console.log("Error: Enter a positive number")
+    return
+  }
+  const numbers = [];
+  for (let i = 0; i < N ; i ++){
+    inputNum = readlineSync.question(`Enter Number ${i+1}: `)
+    numbers.push(parseInt(inputNum))
+  }
+  console.log("Results: ")
+  console.log(`Sum: ${numbersSum(numbers)}`)
+  console.log(`Average: ${numbersAvg(numbers)}`)
+  console.log(`Maximum: ${maxNumber(numbers)}`)
+  console.log(`Minimum: ${minNumber(numbers)}`)
+}
+main()
