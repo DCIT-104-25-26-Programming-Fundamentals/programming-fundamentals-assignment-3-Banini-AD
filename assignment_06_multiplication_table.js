@@ -59,4 +59,38 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+function multiplicationTbl (number){
+  console.log(`Multiplication Table for ${number}: `)
+  for (let i = 1; i <= 12; i++){
+    let result = number * i
+    console.log(`${number}  x  ${i}  =  ${result}`)
+  }
+}
+function tablesUpToN (n){
+  for (let i = 1; i < n; i++){
+    multiplicationTbl(i)
+    console.log("---------------------------")
+  }
+}
+
+function main (){
+  console.log("PART A: Single Table")
+  const readlineSync = require("readline-sync")
+  const numberInput = readlineSync.question("Enter a number: ")
+  const number = parseInt(numberInput)
+  multiplicationTbl(number)
+
+  console.log()
+  console.log("PART B: Bonus - Tables from 1 to N")
+  const nInput = readlineSync.question("Enter N: ")
+  const n = parseInt(nInput)
+
+  if (n <= 0){
+    console.log("Error: N must be a positive integer.")
+    return
+  }
+
+  tablesUpToN(n)
+}
+main()
 
