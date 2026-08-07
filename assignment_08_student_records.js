@@ -84,4 +84,110 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readlineSync = require("readline-sync")
 
+function averageScore (scores){
+  let total = 0
+  let average = 0
+  scores.forEach(score =>{
+    total = total + score
+    average = total / scores.length
+  })
+  return average.toFixed(2)
+}
+
+function addStudent (students){
+  name = readlineSync.question("Student name: ")
+  idInput = readlineSync.question("Student ID: ")
+  studentId = parseInt(idInput)
+
+  countInput = readlineSync.question("How many scores? ")
+  count = parseInt(countInput)
+
+  scores = []
+  for (let i = 1; i <= count; i++ ){
+    scoreInput = readlineSync.questionInt(`Enter score ${i}: `)
+    scores.push(scoreInput)
+  }
+
+  const student = {
+    "name": name,
+    "id": studentId,
+    "scores": scores
+  }
+  students.push(student)
+  console.log(`Student "${name}" added successfully.`)
+}
+
+function displayStudents (students){
+  if (students.length === 0){
+    print("No students have been added yet.")
+    return
+  }
+
+  students.forEach(student => {
+    console.log(`
+    Name: ${student.name}
+    ID: ${student.id}
+    Scores: ${student.scores.join(" ")}
+
+    ---------------------------------------
+    `)
+  })
+
+}
+
+function findStudentAverage (students){
+  idInput = readlineSync.question("Enter student ID: ")
+  searchId = parseInt(idInput)
+
+students.forEach(student =>{
+  if (student.id === searchId){
+      const avg = averageScore(student.scores)
+      console.log(`${student.name}'s average score: ${avg}`)
+      return
+  } else {
+    console.log("Error: No student found with that ID.")
+  }
+})
+
+}
+
+function printMenu (){
+  console.log("================================")
+  console.log("   STUDENT RECORD SYSTEM MENU")
+  console.log("================================")
+  console.log("1. Add student")
+  console.log("2. Display all students")
+  console.log("3. Calculate average score")
+  console.log("4. Quit")
+}
+
+function main (){
+  const students = []
+  let running = true
+
+  while( running){
+    printMenu()
+    choice = readlineSync.questionInt("Enter your choice (1-4): ")
+
+    if (choice === 1){
+      addStudent(students)
+    }
+    else if (choice === 2){
+      displayStudents(students)
+    }
+    else if (choice === 3){
+      findStudentAverage(students)
+    }
+    else if (choice === 4){
+      console.log("Goodbye!")
+      running = false
+    }
+    else{
+      console.log("Error: Please enter a number between 1 and 4.")
+    }
+  }
+}
+
+main()
