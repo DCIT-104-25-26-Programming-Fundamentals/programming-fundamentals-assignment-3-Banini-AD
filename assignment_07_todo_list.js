@@ -81,4 +81,83 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readlineSync = require("readline-sync")
 
+function addTask (tasks){
+  const taskDescription = readlineSync.question("Enter task: ")
+  tasks.push(taskDescription)
+  console.log(`Task added: "${taskDescription}"`)
+}
+function viewTasks (tasks){
+  if (tasks.length === 0){
+    console.log("Your to-do list is empty.")
+    return
+  }
+
+  console.log("Your Tasks:")
+  let count = 1
+  tasks.forEach(task => {
+    console.log(`${count}. ${task}`)
+    count = count + 1
+  })
+}
+
+function deleteTask (tasks){
+  if (tasks.length === 0){
+    console.log("Your to-do list is empty.")
+    return
+  }
+
+  viewTasks(tasks)
+  const numberInput = readlineSync.question("Enter task number to delete: ")
+  const taskNumber = parseInt(numberInput)
+
+  if (taskNumber < 1 || taskNumber > tasks.length){
+    console.log("Error: Invalid task number.")
+    return
+  }
+
+  const removedTask = tasks[taskNumber - 1]
+  tasks.splice(taskNumber - 1, taskNumber)
+  console.log(`Task "${removedTask}" has been removed.`)
+}
+
+function printMenu (){
+  console.log("============================")
+  console.log("     TO-DO LIST MENU")
+  console.log("============================")
+  console.log("1. Add task")
+  console.log("2. View tasks")
+  console.log("3. Delete task")
+  console.log("4. Quit")
+}
+
+function main (){
+  const tasks = []
+  let running = true
+
+  while (running){
+    printMenu()
+    choice = readlineSync.questionInt("Enter your choice (1-4): ")
+
+    if (choice === 1){
+      addTask(tasks)
+    }
+    else if ( choice === 2){
+      viewTasks(tasks)
+    }
+    else if (choice === 3){
+      deleteTask(tasks)
+    }
+    else if (choice === 4){
+      console.log("Goodbye!")
+      running = false
+    }
+    else {
+      console.log("Error: Please enter a number from 1 to 4.")
+    }
+  }
+
+    console.log()
+}
+main()
